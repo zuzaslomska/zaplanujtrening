@@ -1,0 +1,8 @@
+{% extends "__base1__glowna.html" %}
+{% block content %}
+    <form method="post">
+       {{ form.as_p }}
+       <input type="submit" value="Zarejestruj się">
+       {% csrf_token %}
+   </form>
+{% endblock %}
