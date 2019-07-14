@@ -5,4 +5,4 @@ from django.views import View
 
 class MainSite(View):
     def get(self,request):
-        return render(request,"__base1__glowna.html")
+        return render(request,"index.html")
