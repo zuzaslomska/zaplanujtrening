@@ -11,8 +11,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 
 class MainSite(View):
     def get(self,request):
-        return render(request,"__base1__glowna.html")
-
+        return render(request,"index.html")
 
 class Registration(FormView):
     template_name = 'registration.html'
