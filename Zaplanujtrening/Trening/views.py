@@ -2,14 +2,19 @@ from django.shortcuts import render
 from Zaplanujtrening import urls
 from django.http import request
 from django.views import View
+from django.views.generic import TemplateView
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse, HttpResponseForbidden
 
-class MainSite(View):
-    def get(self,request):
-        return render(request,"__base1__glowna.html")
+class IndexView(TemplateView):
+    template_name = "index.html"
+
+
+class ContactView(TemplateView):
+    template_name = "contact.html"
+
 
 
 class Registration(View):
