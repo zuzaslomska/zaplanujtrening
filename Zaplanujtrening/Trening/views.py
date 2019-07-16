@@ -38,4 +38,3 @@ class Login(FormView):
         user = authenticate(username=username, password=password)
         login(self.request,user)
         return super().form_valid(form)
-
