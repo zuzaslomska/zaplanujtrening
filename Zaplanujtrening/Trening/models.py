@@ -1,12 +1,17 @@
 from django.db import models
-
-class PersonalTrainer(models.Model):
-    first_name = models.CharField(max_length=64)
-    last_name = models.CharField(max_length=64)
-    experience = models.TextField()
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User,AbstractUser
+from Zaplanujtrening import settings
 
 
-class Dietician(models.Model):
-    first_name = models.CharField(max_length=64)
-    last_name = models.CharField(max_length=64)
-    experience = models.TextField()
+class MyUser(AbstractUser):
+    about = models.TextField()
+    trener = models.BooleanField(default=False)
+    class Meta(AbstractUser.Meta):
+        swappable = 'AUTH_USER_MODEL'
+
+class Rating(models.Model):
+    comments = models.TextField(verbose_name=_("komentarz"))
+    rating = models.IntegerField(verbose_name=_("Ocena"))
+    all_votes = models.IntegerField()
+    User_name = models.ForeignKey(MyUser,on_delete=models.CASCADE)
