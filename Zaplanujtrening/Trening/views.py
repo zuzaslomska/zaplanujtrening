@@ -4,9 +4,10 @@ from django.http import request
 from django.views import View
 from django.views.generic.edit import FormView
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth import authenticate,login, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse, HttpResponseForbidden
+from django.views.generic import TemplateView, RedirectView
 
 
 class MainSite(View):
@@ -38,4 +39,28 @@ class Login(FormView):
         user = authenticate(username=username, password=password)
         login(self.request,user)
         return super().form_valid(form)
+
+
+class MyAccount(TemplateView):
+    template = 'my_account.html'
+
+
+# class MyPlans():
+
+
+class EditDetails(FormView):
+    template_name = 'edit_details.html'
+    form_class = UserCreationForm
+    success_url = '/login/'
+
+
+
+
+class About(TemplateView):
+    template_name = 'about.html'
+
+
+class Contact(TemplateView):
+    template_name = 'contact.html'
+    success_url = '/'
 
