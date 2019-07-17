@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Rating
+from django.views.generic import ListView
 from django.views import View
-from django.views.generic.edit import FormView, CreateView
+from django.views.generic.edit import FormView
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -51,3 +51,9 @@ class Login(FormView):
         user = authenticate(username=username, password=password)
         login(self.request,user)
         return super().form_valid(form)
+
+
+class TrainersView(ListView):
+    template_name = "Trainers.html"
+    queryset = MyUser.objects.filter(trener=True)
+    context_object_name = "myuser"

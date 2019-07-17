@@ -1,0 +1,8 @@
+{% extends "__base1__glowna.html" %}
+{% block content %}
+    <ul>
+    {% for trainer in myuser %}
+        <li>{{ trainer }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
