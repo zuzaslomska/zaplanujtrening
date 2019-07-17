@@ -15,3 +15,4 @@ class Rating(models.Model):
     rating = models.IntegerField(verbose_name=_("Ocena"))
     all_votes = models.IntegerField()
     User_name = models.ForeignKey(MyUser,on_delete=models.CASCADE)
+

@@ -1,9 +1,14 @@
 from django import forms
-from django.contrib.auth.models import User
+from .models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import MyUser
 
 
+class NameForm(model.Form):
+    model = User
+    exclude = ['login','rating', 'opinion',]
+
+    
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = MyUser
@@ -15,3 +20,4 @@ class RegistrationForm(UserCreationForm):
                   "last_name":"Nazwisko",
                   "email":"E-mail",
                   "about":"O mnie"}
+
