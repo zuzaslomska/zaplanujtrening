@@ -29,3 +29,8 @@ class EditProfileForm(UserChangeForm):
             'email',
             'about'
         )
+
+class ContactForm(forms.Form):
+    contact_user  = forms.CharField(max_length=120,label="Imię")
+    email = forms.EmailField(required=True, label="E-mail")
+    message = forms.CharField(widget=forms.Textarea)

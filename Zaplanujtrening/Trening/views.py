@@ -1,4 +1,4 @@
-
+from django.core.mail import send_mail
 from django.views.generic import ListView
 from django.shortcuts import render,redirect
 from django.views import View
@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.views.generic import TemplateView, RedirectView
-from .forms import RegistrationForm, EditProfileForm
+from .forms import RegistrationForm, EditProfileForm, ContactForm
 from .models import MyUser,Rating
 
 
@@ -112,9 +112,22 @@ class About(TemplateView):
     template_name = 'about.html'
 
 
-class Contact(TemplateView):
-    template_name = 'contact.html'
-    success_url = '/'
+class Contact(FormView):
+    template_name = "contact.html"
+    form_class = ContactForm
+    success_url = "/contact"
+
+    def form_valid(self, form):
+
+        send_mail(
+            form.cleaned_data["email"],
+            "Wiadomość od "+form.cleaned_data["contact_user"]+": "+form.cleaned_data["message"],
+            "dudixxx100@gmail.com",
+            [form.cleaned_data["email"]],
+            fail_silently=False,
+        )
+        return super().form_valid(form)
+
 
 """
 class Logout(View):
