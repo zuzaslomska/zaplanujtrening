@@ -84,6 +84,7 @@ DATABASES = {
         'PORT': 5432
     }
 }
+if os.environ['LOGNAME']=='bcelmer': DATABASES={'default':{'ENGINE': 'django.db.backends.sqlite3','NAME': os.path.join(BASE_DIR, 'db.sqlite3')}}
 
 
 # Password validation
@@ -123,3 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = 'media/'
+MEDIA_URL = '/media/'

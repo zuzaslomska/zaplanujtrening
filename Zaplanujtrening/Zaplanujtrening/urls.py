@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Trening.views import MainSite
+from Trening.views import MainSite, upload_file, upload_view
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainSite.as_view()),
-]
+    path('upload/', upload_file),
+    path('show_some_upload/<uid>/<seo_path>', upload_view),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

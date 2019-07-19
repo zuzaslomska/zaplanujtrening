@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Upload test</title>
+    </head>
+    <body>
+        <form enctype="multipart/form-data" method="POST" class="post-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    </body>
+</html>
