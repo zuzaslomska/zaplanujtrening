@@ -2,6 +2,6 @@
 {% block content %}
     <h2>IMIĘ|NAZWISKO</h2>
     {% for trainer in myuser %}
-        <h3>{{ trainer.first_name}} {{trainer.last_name }} {{ trainer.vote.rating}}</h3>
+        <h3>{{ trainer.first_name}} {{trainer.last_name }} {{ trainer.vote.rating}}|({{ trainer.vote.all_votes }})</h3>
     {% endfor %}
 {% endblock %}
