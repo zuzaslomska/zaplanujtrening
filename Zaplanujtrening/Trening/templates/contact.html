@@ -3,23 +3,9 @@
 
 <div id="after_submit"></div>
 <form id="contact_form" method="POST" enctype="multipart/form-data">
-  <div>
-    <label class="required" for="name">Twoje imię:</label><br />
-    <input id="name" class="input" name="name" type="text" value="" size="30" /><br />
-    <span id="name_validation" class="error_message"></span>
-  </div>
-  <div>
-    <label class="required" for="email">Adres email:</label><br />
-    <input id="email" class="input" name="email" type="email    " value="" size="30" /><br />
-    <span id="email_validation" class="error_message"></span>
-  </div>
-  <div>
-    <label class="required" for="message">Twoja wiadomość:</label><br />
-    <textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
-    <span id="message_validation" class="error_message"></span>
-  </div>
-
-    <input id="submit_button" type="submit" value="Send email" />
+    <h3>Wyślij do nas wiadomość!</h3>
+    {{ form.as_p }}
+    <input id="submit_button" type="submit" value="Wyślij wiadomość!" />
     {% csrf_token %}
 </form>
 
