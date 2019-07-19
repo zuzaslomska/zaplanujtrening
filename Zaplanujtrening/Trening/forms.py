@@ -7,11 +7,12 @@ from .models import MyUser
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = MyUser
-        fields = ("username","password1","password2","email","first_name","last_name","about")
+        fields = ("username","password1","password2","email","first_name","last_name","about","avatar")
         labels = {"username":"Nazwa użytkownika",
                   "password1":"Hasło",
                   "password2":"Powtórz hasło",
                   "first_name":"Imię",
                   "last_name":"Nazwisko",
                   "email":"E-mail",
-                  "about":"O mnie"}
+                  "about":"O mnie",
+                  "avatar":"Zdjęcie"}

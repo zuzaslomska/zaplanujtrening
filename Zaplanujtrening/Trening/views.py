@@ -28,13 +28,15 @@ class Registration(FormView):
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
         about = form.cleaned_data["about"]
+        avatar = form.cleaned_data["avatar"]
 
         new_user = MyUser.objects.create_user(username=username,
                                             email=email,
                                             password=password,
                                             first_name=first_name,
                                             last_name=last_name,
-                                            about = about)
+                                            about=about,
+                                            avatar=avatar,)
         return super().form_valid(form)
 
 
@@ -57,3 +59,4 @@ class TrainersView(ListView):
     template_name = "Trainers.html"
     queryset = MyUser.objects.filter(trener=True)
     context_object_name = "myuser"
+
