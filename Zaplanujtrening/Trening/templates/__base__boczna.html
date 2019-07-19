@@ -23,10 +23,15 @@
          <div class="d-flex justify-content-around">
              <h4 class="text-light mr-3">Imię</h4>
              <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
+                <div class="nav-item ml-4">
+                    <form method="post">
+                    <input type="submit" value="wyloguj" name="wyloguj">
+                        {% csrf_token %}
+                        </form>
+                </div>
          </div>
         </nav>
     </header>
-
     <section class="dashboard-section">
         <div class="row dashboard-nowrap">
                 <ul class="nav flex-column long-bg">
@@ -73,6 +78,17 @@
             </div>
         </div>
     </section>
+     <footer class="footer-section pt-3 pb-3">
+            <div class="container text-center">
+                <h5 class="text-light">Copyright <span class="footer-text-color">zaplanujtrening.pl</span></h5>
+            </div>
+            <div class="container text-center">
+                <h5 class="text-light"><a href="/about">O nas</a></span></h5>
+            </div>
+            <div class="container text-center">
+                <h5 class="text-light"><a href="/contact">Kontakt</a></span></h5>
+            </div>
+        </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
