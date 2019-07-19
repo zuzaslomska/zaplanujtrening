@@ -1,9 +1,11 @@
 from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from .models import User
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import MyUser
+from django.forms import ModelForm
 
 
+    
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = MyUser
@@ -16,3 +18,14 @@ class RegistrationForm(UserCreationForm):
                   "email":"E-mail",
                   "about":"O mnie",
                   "avatar":"Zdjęcie"}
+
+
+class EditProfileForm(UserChangeForm):
+    class Meta:
+        model=MyUser
+        fields = (
+            'first_name',
+            'last_name',
+            'email',
+            'about'
+        )

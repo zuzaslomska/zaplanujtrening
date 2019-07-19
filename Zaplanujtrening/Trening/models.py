@@ -16,4 +16,3 @@ class MyUser(AbstractUser):
     vote = models.ForeignKey(Rating,on_delete=models.CASCADE, null=True)
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
-
