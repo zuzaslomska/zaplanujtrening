@@ -25,21 +25,8 @@ class Registration(FormView):
     success_url = '/login/'
 
     def form_valid(self,form):
-        username = form.cleaned_data["username"]
-        password = form.cleaned_data["password1"]
-        email = form.cleaned_data["email"]
-        first_name = form.cleaned_data["first_name"]
-        last_name = form.cleaned_data["last_name"]
-        about = form.cleaned_data["about"]
-        avatar = form.cleaned_data["avatar"]
+        form.save()
 
-        new_user = MyUser.objects.create_user(username=username,
-                                            email=email,
-                                            password=password,
-                                            first_name=first_name,
-                                            last_name=last_name,
-                                            about=about,
-                                            avatar=avatar,)
         return super().form_valid(form)
 
 
