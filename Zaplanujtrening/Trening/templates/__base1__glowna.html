@@ -21,17 +21,21 @@
             </a>
             <ul class="nav nounderline text-uppercase">
                 <li class="nav-item ml-4">
-                    <a class="nav-link color-header" href="/login">Logowanie</a>
-                </li>
-                <li class="nav-item ml-4">
-                    <a class="nav-link color-header" href="/registration">Rejestracja</a>
-                </li>
-                <li class="nav-item ml-4">
-                    <a class="nav-link disabled" href="/myaccount">Moje konto</a>
-                </li>
-                <li class="nav-item ml-4">
-                    <a class="nav-link disabled" href="">Zostań trenerem</a>
-                </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item ml-4">
+                        <a class="nav-link disabled" href="/myaccount">Moje konto</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ml-4">
+                        <a class="nav-link color-header" href="/login">Logowanie</a>
+                    </li>
+                    <li class="nav-item ml-4">
+                        <a class="nav-link color-header" href="/registration">Rejestracja</a>
+                    </li>
+                    <li class="nav-item ml-4">
+                        <a class="nav-link disabled" href="">Zostań trenerem</a>
+                    </li>
+                    {% endif %}
             </ul>
         </nav>
     </header>
@@ -56,13 +60,6 @@
                                 <span>Plany</span>
                                 <i class="fas fa-angle-right"></i>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <span>Trenerzy</span>
-                                <i class="fas fa-angle-right"></i>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">
                                 <span>Ćwiczenia</span>

@@ -81,7 +81,7 @@ class MyAccount(TemplateView):
 
         return super().form_valid(form)"""
 
-class Logout(View):
+"""class Logout(View):
     def get(self,request):
         logout(request)
         if MyUser.is_authenticated:
@@ -94,7 +94,7 @@ class Logout(View):
         log_out = request.POST.get("wyloguj")
         if log_out:
             return render(request, "index.html",)
-
+"""
 class About(TemplateView):
     template_name = 'about.html'
 
