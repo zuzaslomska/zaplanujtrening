@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
-from django.views.generic import TemplateView, RedirectView
-from .forms import RegistrationForm, EditProfileForm, ContactForm
+from django.views.generic import TemplateView, RedirectView, DetailView
+from .forms import RegistrationForm, EditProfileForm, ContactForm, VoteForm
 from .models import MyUser,Rating
 
 
@@ -114,6 +114,29 @@ class Contact(FormView):
             fail_silently=False,
         )
         return super().form_valid(form)
+
+class TrainerDetails(View):
+    def get(self,request,pk):
+        model = MyUser.objects.get(pk=pk)
+        comment_model = Rating.objects.filter(user_comment=pk)
+        ctx = {"myuser":model,"comment":comment_model}
+
+        return render(request, "Trainer_detail.html", ctx)
+
+    def post(self,request,pk):
+        model = MyUser.objects.get(pk=pk)
+        comment_model = Rating.objects.filter(user_comment=pk)
+        ctx = {"myuser": model,"comment":comment_model}
+
+        vote = request.POST.get("vote")
+        model.sum_of_votes += (int(vote))
+        model.all_votes += 1
+        avg_votes = model.sum_of_votes/model.all_votes
+        model.rating = avg_votes
+        model.save()
+        return render(request, "Trainer_detail.html", ctx)
+
+
 
 
 """
