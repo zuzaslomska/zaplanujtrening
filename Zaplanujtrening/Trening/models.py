@@ -5,7 +5,7 @@ from django.contrib.auth.models import User,AbstractUser
 class MyUser(AbstractUser):
     about = models.TextField()
     trener = models.BooleanField(default=False)
-    avatar = models.ImageField(upload_to='profile_pics')
+    avatar = models.ImageField(upload_to='profile_pics',null=True)
     rating = models.DecimalField(verbose_name=_("Ocena"),default=0,decimal_places=1,max_digits=2)
     all_votes = models.IntegerField(default=0)
     sum_of_votes = models.IntegerField(default=0)
