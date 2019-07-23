@@ -1,0 +1,12 @@
+{% extends "__base1__glowna.html" %}
+{% block content %}
+
+<div id="after_submit"></div>
+<form id="contact_form" method="POST" enctype="multipart/form-data">
+    <h3>Wyślij do nas wiadomość!</h3>
+    {{ form.as_p }}
+    <input id="submit_button" type="submit" value="Wyślij wiadomość!" />
+    {% csrf_token %}
+</form>
+
+{% endblock %}
