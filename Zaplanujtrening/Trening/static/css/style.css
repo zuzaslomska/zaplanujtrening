@@ -2,7 +2,7 @@
 /*---- Main style ----*/
 /*------------------------------*/
 :root {
-  --link-color: #ff6600;
+  --link-color: #7fff00;
   --light-link-color: #fffffa;
   --background-color: #4b4c4a;
   --lighter-background-color: #5a615f;
@@ -24,7 +24,7 @@ html {
   min-height: 100%;
 }
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Bitter", sans-serif;
   font-weight: 400;
   background: repeat url("/static/images/image.png");
 }
@@ -149,7 +149,7 @@ margin: 0 auto !important;
 }
 
 .main-logo {
-  font-family: 'Bitter', serif;
+  font-family: 'Bitter', sans-serif;
   display: inline-block;
   color: var(--light-link-color)!important;
   margin-top: 10px;
@@ -162,7 +162,7 @@ margin: 0 auto !important;
 }
 
 .main-logo span {
-  color: var(--link-color);
+  color: var(--link-color)!important;
 }
 
 /*------------------------------*/
