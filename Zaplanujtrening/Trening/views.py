@@ -116,6 +116,8 @@ class Contact(FormView):
         return super().form_valid(form)
 
 
+    
+
 """
 class Logout(View):
     def get(self, request):
