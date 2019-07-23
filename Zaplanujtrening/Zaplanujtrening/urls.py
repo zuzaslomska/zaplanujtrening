@@ -18,20 +18,26 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,TrainersView\
-    #,EditProfile
+from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,TrainersView, TrainerDetails,\
+    TrainerRegistration
+#,EditProfile
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainSite.as_view()),
     path('registration/', Registration.as_view()),
+    path('registration/trainer',TrainerRegistration.as_view()),
     path('login/', Login.as_view()),
     path('trainers/', TrainersView.as_view()),
+    path('trainer/<int:pk>', TrainerDetails.as_view()),
     path('about/', About.as_view()),
     path('contact/', Contact.as_view()),
     path('myaccount/', MyAccount.as_view()),
   #  path('myplans/', MyPlans.as_view()),
   #  path('editprofile/<id>', EditProfile.as_view()),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html')),
+
+
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

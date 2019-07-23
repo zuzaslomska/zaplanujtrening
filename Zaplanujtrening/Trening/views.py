@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
-from django.views.generic import TemplateView, RedirectView
-from .forms import RegistrationForm, EditProfileForm, ContactForm
+from django.views.generic import TemplateView, RedirectView, DetailView
+from .forms import RegistrationForm, EditProfileForm, ContactForm, VoteForm
 from .models import MyUser,Rating
 
 
@@ -94,6 +94,51 @@ class Contact(FormView):
         send_mail(
             form.cleaned_data["email"],
             "Wiadomość od "+form.cleaned_data["contact_user"]+": "+form.cleaned_data["message"],
+            "dudixxx100@gmail.com",
+            ['tomizuz123@gmail.com'],
+            fail_silently=False,
+        )
+        return super().form_valid(form)
+
+class TrainerDetails(View):
+    def get(self,request,pk):
+        model = MyUser.objects.get(pk=pk)
+        comment_model = Rating.objects.filter(user_comment=pk)
+        ctx = {"myuser":model,"comment":comment_model}
+
+        return render(request, "Trainer_detail.html", ctx)
+
+    def post(self,request,pk):
+        model = MyUser.objects.get(pk=pk)
+        comment_model = Rating.objects.filter(user_comment=pk)
+        ctx = {"myuser": model,"comment":comment_model}
+
+        vote = request.POST.get("vote")
+        model.sum_of_votes += (int(vote))
+        model.all_votes += 1
+        avg_votes = model.sum_of_votes/model.all_votes
+        model.rating = avg_votes
+        model.save()
+        return render(request, "Trainer_detail.html", ctx)
+
+class TrainerRegistration(FormView):
+    template_name = 'registration.html'
+    form_class = RegistrationForm
+    success_url = '/login/'
+
+    def form_valid(self,form):
+        form.save()
+        send_mail(
+            form.cleaned_data["email"],
+            "Wiadomość od "+form.cleaned_data["username"]+": "+"CHCĘ ZOSTAĆ TRENEREM",
+            "dudixxx100@gmail.com",
+            ["tomizuz123@gmail.com"],
+            fail_silently=False,
+        )
+        send_mail(
+            "Zaplanuj Trening",
+            "Witaj "+form.cleaned_data["contact_user"]+"!"+ "Twoje zapytanie o zostanie trenerem jest rozpatrywane,"
+                                                            "poczekaj na wiadomość od nas!" ,
             "dudixxx100@gmail.com",
             [form.cleaned_data["email"]],
             fail_silently=False,
