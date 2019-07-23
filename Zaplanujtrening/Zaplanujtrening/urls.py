@@ -17,13 +17,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,Logout,TrainersView, TrainerDetails\
-    #,EditProfile
+from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,Logout,TrainersView, TrainerDetails,\
+    TrainerRegistration
+#,EditProfile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainSite.as_view()),
     path('registration/', Registration.as_view()),
+    path('registration/trainer',TrainerRegistration.as_view()),
     path('login/', Login.as_view()),
     path('trainers/', TrainersView.as_view()),
     path('trainer/<int:pk>', TrainerDetails.as_view()),
@@ -33,5 +35,7 @@ urlpatterns = [
   #  path('myplans/', MyPlans.as_view()),
   #  path('editprofile/<id>', EditProfile.as_view()),
     path('logout/', Logout.as_view()),
+
+
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -110,7 +110,7 @@ class Contact(FormView):
             form.cleaned_data["email"],
             "Wiadomość od "+form.cleaned_data["contact_user"]+": "+form.cleaned_data["message"],
             "dudixxx100@gmail.com",
-            [form.cleaned_data["email"]],
+            ['tomizuz123@gmail.com'],
             fail_silently=False,
         )
         return super().form_valid(form)
@@ -135,6 +135,30 @@ class TrainerDetails(View):
         model.rating = avg_votes
         model.save()
         return render(request, "Trainer_detail.html", ctx)
+
+class TrainerRegistration(FormView):
+    template_name = 'registration.html'
+    form_class = RegistrationForm
+    success_url = '/login/'
+
+    def form_valid(self,form):
+        form.save()
+        send_mail(
+            form.cleaned_data["email"],
+            "Wiadomość od "+form.cleaned_data["username"]+": "+"CHCĘ ZOSTAĆ TRENEREM",
+            "dudixxx100@gmail.com",
+            ["tomizuz123@gmail.com"],
+            fail_silently=False,
+        )
+        send_mail(
+            "Zaplanuj Trening",
+            "Witaj "+form.cleaned_data["contact_user"]+"!"+ "Twoje zapytanie o zostanie trenerem jest rozpatrywane,"
+                                                            "poczekaj na wiadomość od nas!" ,
+            "dudixxx100@gmail.com",
+            [form.cleaned_data["email"]],
+            fail_silently=False,
+        )
+        return super().form_valid(form)
 
 
 
