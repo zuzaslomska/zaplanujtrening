@@ -33,17 +33,15 @@ class Registration(FormView):
 class Login(FormView):
     template_name = 'login.html'
     form_class = AuthenticationForm
-    success_url = '/'
+    success_url = '/myaccount/'
 
     def form_valid(self,form):
         username = form.cleaned_data["username"]
         password = form.cleaned_data["password"]
-      #  login_out = request.POST.get("logout")
 
         user = authenticate(username=username, password=password)
         login(self.request,user)
         return super().form_valid(form)
-
 
 
 class TrainersView(ListView):
@@ -81,19 +79,6 @@ class MyAccount(TemplateView):
 
         return super().form_valid(form)"""
 
-class Logout(View):
-    def get(self,request):
-        logout(request)
-        if MyUser.is_authenticated:
-            ctx = {"ops":"Nie udało się wylogować"}
-            return render(request,"logout.html",ctx)
-        ctx = {"ops":"Wylogowano pomyślnie"}
-        return render(request,"logout.html",ctx)
-
-    def post(self,request):
-        log_out = request.POST.get("wyloguj")
-        if log_out:
-            return render(request, "index.html",)
 
 class About(TemplateView):
     template_name = 'about.html'
@@ -160,17 +145,3 @@ class TrainerRegistration(FormView):
         )
         return super().form_valid(form)
 
-
-
-
-    
-
-"""
-class Logout(View):
-    def get(self, request):
-        if MyUser is not None:
-            logout(request)
-            return redirect('/')
-        else:
-            return HttpResponse("Nie udało sie wylogować")
-            """
