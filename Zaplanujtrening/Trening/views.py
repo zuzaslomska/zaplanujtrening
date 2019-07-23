@@ -1,4 +1,4 @@
-
+from django.core.mail import send_mail
 from django.views.generic import ListView
 from django.shortcuts import render,redirect
 from django.views import View
@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.views.generic import TemplateView, RedirectView
-from .forms import RegistrationForm, EditProfileForm
+from .forms import RegistrationForm, EditProfileForm, ContactForm
 from .models import MyUser,Rating
 
 
@@ -25,21 +25,8 @@ class Registration(FormView):
     success_url = '/login/'
 
     def form_valid(self,form):
-        username = form.cleaned_data["username"]
-        password = form.cleaned_data["password1"]
-        email = form.cleaned_data["email"]
-        first_name = form.cleaned_data["first_name"]
-        last_name = form.cleaned_data["last_name"]
-        about = form.cleaned_data["about"]
-        avatar = form.cleaned_data["avatar"]
+        form.save()
 
-        new_user = MyUser.objects.create_user(username=username,
-                                            email=email,
-                                            password=password,
-                                            first_name=first_name,
-                                            last_name=last_name,
-                                            about=about,
-                                            avatar=avatar,)
         return super().form_valid(form)
 
 
@@ -112,9 +99,22 @@ class About(TemplateView):
     template_name = 'about.html'
 
 
-class Contact(TemplateView):
-    template_name = 'contact.html'
-    success_url = '/'
+class Contact(FormView):
+    template_name = "contact.html"
+    form_class = ContactForm
+    success_url = "/contact"
+
+    def form_valid(self, form):
+
+        send_mail(
+            form.cleaned_data["email"],
+            "Wiadomość od "+form.cleaned_data["contact_user"]+": "+form.cleaned_data["message"],
+            "dudixxx100@gmail.com",
+            [form.cleaned_data["email"]],
+            fail_silently=False,
+        )
+        return super().form_valid(form)
+
 
     
 

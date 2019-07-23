@@ -12,7 +12,7 @@ class Rating(models.Model):
 class MyUser(AbstractUser):
     about = models.TextField()
     trener = models.BooleanField(default=False)
-    avatar = models.ImageField(upload_to='profile_pics', blank=True, default="static/cl-logo.png")
+    avatar = models.ImageField(upload_to='profile_pics')
     vote = models.ForeignKey(Rating,on_delete=models.CASCADE, null=True)
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'

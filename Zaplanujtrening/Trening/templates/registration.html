@@ -1,6 +1,6 @@
 {% extends "__base1__glowna.html" %}
 {% block content %}
-    <form method="post">
+    <form enctype="multipart/form-data" method="POST" class="post-form">
         {{ form.as_p }}
         <input type="submit" value="Zarejestruj się">
         {% csrf_token %}

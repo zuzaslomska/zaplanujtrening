@@ -1,7 +1,10 @@
 {% extends "__base1__glowna.html" %}
 {% block content %}
     <h2>IMIĘ|NAZWISKO</h2>
+    <ol>
     {% for trainer in myuser %}
-        <h3>{{ trainer.first_name}} {{trainer.last_name }} {{ trainer.vote.rating}}</h3>
+            <li><img src="{{ trainer.avatar.url }}", width="150">{{ trainer.first_name}} {{trainer.last_name }}
+                {{ trainer.vote.rating}}|({{ trainer.vote.all_votes }})</li>
     {% endfor %}
+    </ol>
 {% endblock %}
