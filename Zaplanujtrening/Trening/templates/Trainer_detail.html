@@ -1,0 +1,19 @@
+{% extends '__base1__glowna.html' %}
+{% block content %}
+    <img src="{{ myuser.avatar.url }}" width="500">
+    <h1>{{ myuser.first_name }} {{ myuser.last_name }}</h1>
+    <h2>{{ myuser.about }}</h2>
+    <p>Ocena:</p><br>
+        {{ myuser.rating }}/5
+    <form method="post">
+        <select name="vote">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        {% csrf_token %}
+        <input type="submit" value="GŁOSUJ!">
+    </form>
+{% endblock %}

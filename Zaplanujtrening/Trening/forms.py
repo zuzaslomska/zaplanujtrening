@@ -1,9 +1,10 @@
 from django import forms
-from .models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import MyUser
-from django.forms import ModelForm
 
+
+RATING = [("1","1"),("2","2")
+        ,("3","3"),("4","4"),("5","5")]
 
     
 class RegistrationForm(UserCreationForm):
@@ -34,3 +35,10 @@ class ContactForm(forms.Form):
     contact_user  = forms.CharField(max_length=120,label="Imię")
     email = forms.EmailField(required=True, label="E-mail")
     message = forms.CharField(widget=forms.Textarea)
+
+
+class VoteForm(forms.ModelForm):
+    rating = forms.ChoiceField(choices=RATING)
+    class Meta:
+        model = MyUser
+        fields = ["rating"]

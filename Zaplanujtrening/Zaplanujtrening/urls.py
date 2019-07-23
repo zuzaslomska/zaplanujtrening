@@ -17,7 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,Logout,TrainersView\
+from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,Logout,TrainersView, TrainerDetails\
     #,EditProfile
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('registration/', Registration.as_view()),
     path('login/', Login.as_view()),
     path('trainers/', TrainersView.as_view()),
+    path('trainer/<int:pk>', TrainerDetails.as_view()),
     path('about/', About.as_view()),
     path('contact/', Contact.as_view()),
     path('myaccount/', MyAccount.as_view()),
