@@ -33,7 +33,7 @@ class Registration(FormView):
 class Login(FormView):
     template_name = 'login.html'
     form_class = AuthenticationForm
-    success_url = '/'
+    success_url = '/myaccount/'
 
     def form_valid(self,form):
         username = form.cleaned_data["username"]
