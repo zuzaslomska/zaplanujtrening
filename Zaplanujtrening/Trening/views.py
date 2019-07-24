@@ -126,7 +126,7 @@ class TrainerRegistration(FormView):
     form_class = RegistrationForm
     success_url = '/login/'
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         form.save()
         send_mail(
             form.cleaned_data["email"],
@@ -137,7 +137,7 @@ class TrainerRegistration(FormView):
         )
         send_mail(
             "Zaplanuj Trening",
-            "Witaj "+form.cleaned_data["contact_user"]+"!"+ "Twoje zapytanie o zostanie trenerem jest rozpatrywane,"
+            "Witaj "+form.cleaned_data['username']+"!"+ "Twoje zapytanie o zostanie trenerem jest rozpatrywane,"
                                                             "poczekaj na wiadomość od nas!" ,
             "dudixxx100@gmail.com",
             [form.cleaned_data["email"]],
