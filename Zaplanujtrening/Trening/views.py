@@ -1,6 +1,6 @@
 from django.core.mail import send_mail
 from django.views.generic import ListView
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
 from django.views.generic.edit import FormView, CreateView, UpdateView
 from django.contrib.auth.models import User
@@ -10,6 +10,8 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView, RedirectView, DetailView
 from .forms import RegistrationForm, EditProfileForm, ContactForm, VoteForm
 from .models import MyUser,Rating
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
@@ -54,10 +56,14 @@ class MyAccount(TemplateView):
 
 
 # class MyPlans():
-"""class EditProfile(UpdateView):
-    queryset = MyUser.objects.get(pk=id)
-    fields = ['first_name']
-    template_name_suffix = '_update_form'"""
+
+class EditProfile(LoginRequiredMixin,UpdateView):
+    model = MyUser
+    fields = ['username','first_name','last_name','email','avatar','about']
+    template_name = 'edit_profile.html'
+    success_url = '/myaccount/'
+
+
 
 """class EditProfile(FormView):
     template_name = 'edit_profile.html'

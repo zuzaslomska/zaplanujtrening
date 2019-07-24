@@ -110,10 +110,10 @@ hr {
 }
 
 .width-medium {
-width: 90% !important;
-margin: 0 auto !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  position: relative;
 }
-
 /*------------------------------*/
 /*---- Paddings ----*/
 /*------------------------------*/
@@ -278,12 +278,6 @@ margin: 0 auto !important;
 
 .footer-section{
   background: var(--background-color);
-  height: 120px;
-  position: absolute;
-  width:100%;
-  bottom: 0px;
-  left:0px;
-
 }
 
 .footer-text-color {
@@ -317,8 +311,6 @@ margin: 0 auto !important;
 .dashboard-nowrap {
   flex-wrap: nowrap;
   margin: 0;
-  height: 100%;
-  position: absolute;
 }
 .long-bg {
   background: var(--lighter-background-color);

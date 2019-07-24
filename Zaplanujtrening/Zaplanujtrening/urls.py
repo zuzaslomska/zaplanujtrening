@@ -19,8 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,TrainersView, TrainerDetails,\
-    TrainerRegistration
-#,EditProfile
+    TrainerRegistration, EditProfile
 
 
 urlpatterns = [
@@ -35,7 +34,7 @@ urlpatterns = [
     path('contact/', Contact.as_view()),
     path('myaccount/', MyAccount.as_view()),
   #  path('myplans/', MyPlans.as_view()),
-  #  path('editprofile/<id>', EditProfile.as_view()),
+    path('editprofile/<int:pk>', EditProfile.as_view()),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html')),
 
 
