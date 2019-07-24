@@ -45,10 +45,9 @@ class Login(FormView):
 
 
 class TrainersView(ListView):
-    template_name = "Trainers.html"
     queryset = MyUser.objects.filter(trener=True)
+    template_name = "Trainers.html"
     context_object_name = "myuser"
-    
 
 class MyAccount(TemplateView):
     template_name = 'my_account.html'
