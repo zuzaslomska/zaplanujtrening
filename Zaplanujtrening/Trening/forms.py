@@ -43,3 +43,4 @@ class VoteForm(forms.ModelForm):
         model = MyUser
         fields = ["rating"]
 
+

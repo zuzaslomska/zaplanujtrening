@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.views.generic import TemplateView, RedirectView, DetailView
 from .forms import RegistrationForm, EditProfileForm, ContactForm, VoteForm
-from .models import MyUser,Rating
+from .models import MyUser,Rating, Plans, Parts, Exercises, ExercisesPlans
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -64,8 +64,10 @@ class EditProfile(LoginRequiredMixin,UpdateView):
     success_url = '/myaccount/'
 
 
-class CreatePlan(CreateView):
-    pass
+class CreatePlan(LoginRequiredMixin,CreateView):
+    model = ExercisesPlans
+    fields = '__all__'
+    template_name = 'create_plan.html'
 
 
 
