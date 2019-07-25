@@ -42,3 +42,4 @@ class VoteForm(forms.ModelForm):
     class Meta:
         model = MyUser
         fields = ["rating"]
+

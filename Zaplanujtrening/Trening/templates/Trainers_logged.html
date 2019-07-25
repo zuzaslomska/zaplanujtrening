@@ -1,0 +1,10 @@
+{% extends "__base__boczna.html" %}
+{% block content %}
+    <h2>TRENERZY:</h2>
+    <ol>
+    {% for trainer in myuser %}
+            <a href="/trainer/{{ trainer.pk }}"><li><img src="{{ trainer.avatar.url }}", width="150">{{ trainer.first_name}} {{trainer.last_name }}
+                </a>{{ trainer.rating}}/5</li>
+    {% endfor %}
+    </ol>
+{% endblock %}

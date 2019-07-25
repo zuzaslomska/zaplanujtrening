@@ -110,10 +110,10 @@ hr {
 }
 
 .width-medium {
-width: 90% !important;
-margin: 0 auto !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  position: relative;
 }
-
 /*------------------------------*/
 /*---- Paddings ----*/
 /*------------------------------*/
