@@ -64,25 +64,10 @@ class EditProfile(LoginRequiredMixin,UpdateView):
     success_url = '/myaccount/'
 
 
+class CreatePlan(CreateView):
+    pass
 
-"""class EditProfile(FormView):
-    template_name = 'edit_profile.html'
-    form_class = EditProfileForm
-    success_url = "/myaccount/"
 
-    def form_valid(self,form):
-        email = form.cleaned_data["email"]
-        first_name = form.cleaned_data["first_name"]
-        last_name = form.cleaned_data["last_name"]
-        about = form.cleaned_data["about"]
-
-        change_user = MyUser.objects.update(email=email,
-                                            first_name=first_name,
-                                            last_name=last_name,
-                                            about=about
-                                            )
-
-        return super().form_valid(form)"""
 
 
 class About(TemplateView):
