@@ -24,21 +24,28 @@ class Parts(models.Model):
 
 class Exercises(models.Model):
     exercise_name = models.CharField(max_length=70)
-    description = models.TextField()
+    description = models.TextField(null=True)
     gif = models.FileField()
     part = models.ForeignKey(Parts, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.exercise_name
 
 
 class Plans(models.Model):
     plan_name = models.CharField(max_length=70)
-    times = models.SmallIntegerField()
-    clock = models.TimeField()
-    rest_time = models.TimeField()
+    description = models.TextField(null=True)
     exercise = models.ManyToManyField(Exercises, through='ExercisesPlans')
+
+    def __str__(self):
+        return self.plan_name
 
 
 class ExercisesPlans(models.Model):
-    exercises = models.ForeignKey(Exercises, on_delete=models.DO_NOTHING)
-    plans = models.ForeignKey(Plans, on_delete=models.DO_NOTHING)
+    exercise = models.ForeignKey(Exercises, on_delete=models.DO_NOTHING)
+    times = models.SmallIntegerField(null=True)
+    clock = models.SmallIntegerField(null=True)
+    rest_time = models.SmallIntegerField(null=True)
+    plan = models.ForeignKey(Plans, on_delete=models.DO_NOTHING)
 
 

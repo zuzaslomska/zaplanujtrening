@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import MyUser
+from .models import MyUser,Plans, Parts, Exercises, ExercisesPlans
 
 
 RATING = [("1","1"),("2","2")
@@ -43,4 +43,8 @@ class VoteForm(forms.ModelForm):
         model = MyUser
         fields = ["rating"]
 
+class PlanForm(forms.ModelForm):
 
+    class Meta:
+        model = ExercisesPlans
+        fields = '__all__'
