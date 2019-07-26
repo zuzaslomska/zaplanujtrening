@@ -4,6 +4,6 @@
         {{ form.as_p }}
         <input type="submit" value="Zaloguj">
         {% csrf_token %}
-        <!-- <input type="button" value="Wyloguj" name="logout"> --!>
     </form>
+    <p><a href="/reset-password/">Zapomniałem hasła</a></p>
 {% endblock %}

@@ -128,9 +128,9 @@ EMAIL_HOST = "smtp.gmail.com"
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = "dudixxx100@gmail.com"
+EMAIL_HOST_USER = "zuzaslomska@gmail.com"
 
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST_PASSWORD = "koralowiec1"
 
 EMAIL_USE_TLS = True
 
@@ -141,3 +141,7 @@ MEDIA_ROOT = 'media/'
 MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'Trening.MyUser'
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
