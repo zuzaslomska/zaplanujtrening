@@ -51,7 +51,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/plan/list">
-                                <span>Plany</span>
+                                <span>Twoje Plany</span>
                                 <i class="fas fa-angle-right"></i>
                             </a>
                         </li>
@@ -61,15 +61,22 @@
                                 <i class="fas fa-angle-right"></i>
                             </a>
                         </li>
-
+                        {% if request.user.trener %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/name/plan">
+                                    <span>Stwórz Plan</span>
+                                    <i class="fas fa-angle-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/create/plan">
+                                    <span>Dodaj ćwiczenia do planu</span>
+                                    <i class="fas fa-angle-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <span>Użytkownicy</span>
-                                <i class="fas fa-angle-right"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="/editprofile/{{ request.user.pk }}">
                                 <span>Edytuj dane</span>
                                 <i class="fas fa-angle-right"></i>
                             </a>
@@ -83,7 +90,9 @@
                     </ul>
 
             <div class="m-4 p-3 width-medium text-color-darker">
+
                 {% block content %} {% endblock %}
+
             </div>
         </div>
     </section>

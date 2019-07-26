@@ -21,8 +21,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
 from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,TrainersView, TrainerDetails,\
-    TrainerRegistration
-#,EditProfile
+    TrainerRegistration, EditProfile, CreatePlan, PlanName
 
 
 urlpatterns = [
@@ -37,16 +36,17 @@ urlpatterns = [
     path('about/', About.as_view()),
     path('contact/', Contact.as_view()),
     path('myaccount/', MyAccount.as_view()),
-  #  path('myplans/', MyPlans.as_view()),
-  #  path('editprofile/<id>', EditProfile.as_view()),
     path('reset-password/', PasswordResetView.as_view()),
     path('reset-password/done', PasswordResetDoneView.as_view()),
     re_path(r'^reset-password/confirm/<uidb64>/<token>/',
              PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset-password/complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html')),
     path('changepassword/', PasswordChangeView.as_view()),
     path('changepassword/done', PasswordChangeDoneView.as_view()),
+    path('editprofile/<int:pk>', EditProfile.as_view()),
+    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html')),
+    path('create/plan/',CreatePlan.as_view()),
+    path('name/plan', PlanName.as_view()),
 
 
 

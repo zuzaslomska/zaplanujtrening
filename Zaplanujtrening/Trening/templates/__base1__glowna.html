@@ -29,6 +29,15 @@
                 <li class="nav-item ml-4">
                     <a class="nav-link disabled" href="/registration/trainer">Zostań trenerem</a>
                 </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item ml-4">
+                        <a class="nav-link disabled" href="/myaccount">Moje Konto</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item ml-4">
+                        <a class="nav-link disabled" href="/login">Moje Konto</a>
+                    </li>
+                {% endif %}
             </ul>
         </nav>
     </header>
@@ -64,11 +73,13 @@
 
             <div class="m-4 p-3 width-medium text-color-darker">
                 {% block content %}{% endblock %}
+
             </div>
+
         </div>
 
     </section>
-        <footer class="footer-section pt-3 pb-3">
+    <footer class="footer-section pt-3 pb-3">
             <div class="container text-center">
                 <h5 class="text-light">Copyright <span class="footer-text-color">zaplanujtrening.pl</span></h5>
             </div>
@@ -79,6 +90,7 @@
                 <h5 class="text-light"><a href="/contact">Kontakt</a></span></h5>
             </div>
         </footer>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
