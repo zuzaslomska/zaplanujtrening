@@ -149,3 +149,9 @@ class PlanList(ListView):
     queryset = Plans.objects.all()
     template_name = 'my_plans.html'
     context_object_name = 'myplan'
+
+
+class PlanDetails(DetailView):
+    model = Plans
+    template_name = 'plan_details.html'
+ #   slug_url_kwarg = ExercisesPlans.plan

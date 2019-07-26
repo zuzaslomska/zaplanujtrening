@@ -1,6 +1,6 @@
 {% extends '__base__boczna.html' %}
 {% block content %}
     {% for plan in myplan %}
-        <li><a href="/plan/detail/{{ plan.pk }}">{{ plan.plan_name }}</a></li>
+        <li><a href="/plan/details/{{ plan.pk }}">{{ plan.plan_name }}</a></li>
     {% endfor %}
 {% endblock %}
