@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.views.generic import TemplateView, RedirectView, DetailView
-from .forms import RegistrationForm, EditProfileForm, ContactForm, VoteForm, PlanForm
+from .forms import RegistrationForm, EditProfileForm, ContactForm, VoteForm, PlanForm, PlanNameForm
 from .models import MyUser,Rating, Plans, Parts, Exercises, ExercisesPlans
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -68,7 +68,7 @@ class CreatePlan(LoginRequiredMixin,CreateView):
     model = ExercisesPlans
     form_class = PlanForm
     template_name = 'create_plan.html'
-
+    success_url = '/create/plan'
 
 
 
@@ -137,3 +137,9 @@ class TrainerRegistration(FormView):
         )
         return super().form_valid(form)
 
+
+class PlanName(CreateView):
+    model = Plans
+    form_class = PlanNameForm
+    template_name = 'plan_name.html'
+    success_url = '/create/plan/'

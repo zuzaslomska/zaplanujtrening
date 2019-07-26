@@ -48,3 +48,12 @@ class PlanForm(forms.ModelForm):
     class Meta:
         model = ExercisesPlans
         fields = '__all__'
+        labels = {'exercise':'Ćwiczenie','times':' Ilość powtórzeń','clock':'Czas (min)','rest_time':'Odpoczynek (min)'}
+
+
+class PlanNameForm(forms.ModelForm):
+
+    class Meta:
+        model = Plans
+        fields = "__all__"
+        exclude = ['exercise']
