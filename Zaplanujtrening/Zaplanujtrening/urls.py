@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,TrainersView, TrainerDetails,\
-    TrainerRegistration, EditProfile, CreatePlan, PlanName, PlanList, PlanDetails
+    TrainerRegistration, EditProfile, CreatePlan, PlanName, PlanList, PlanDetails, ExercisesList
 
 
 urlpatterns = [
@@ -40,6 +40,7 @@ urlpatterns = [
     path('name/plan', PlanName.as_view()),
     path('plan/list', PlanList.as_view()),
     path('plan/details/<int:pk>', PlanDetails.as_view()),
+    path('exercises/list', ExercisesList.as_view()),
 
 
 
