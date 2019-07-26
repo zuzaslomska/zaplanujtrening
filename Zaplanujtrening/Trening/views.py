@@ -147,3 +147,24 @@ class PlanName(CreateView):
     template_name = 'plan_name.html'
     success_url = '/create/plan/'
 
+class PlanList(ListView):
+    queryset = Plans.objects.all()
+    template_name = 'my_plans.html'
+    context_object_name = 'myplan'
+
+
+class PlanDetails(DetailView):
+    model = Plans
+    template_name = 'plan_details.html'
+ #   slug_url_kwarg = ExercisesPlans.plan
+
+
+class ExercisesList(ListView):
+    queryset = Exercises.objects.all()
+    template_name = 'exercises.html'
+    context_object_name = 'exercises'
+
+
+class ExercisesDetails(DetailView):
+    model = Exercises
+    template_name = 'exercises_details.html'

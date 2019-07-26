@@ -1,0 +1,12 @@
+{% extends '__base__boczna.html' %}
+{% block content %}
+    <h2>NAZWA PLANU:</h2>
+    {{ object.plan_name }}<br>
+    <h2>OPIS PLANU:</h2>
+    {{ object.description }}<br>
+    <h2>ĆWICZENIA:</h2>
+    {% for exercise in object.exercise.all %}
+        {{ exercise.exercise_name }}<br>
+    {% endfor %}
+
+{% endblock %}
