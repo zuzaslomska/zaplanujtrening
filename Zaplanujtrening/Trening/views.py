@@ -5,6 +5,9 @@ from django.views import View
 from django.views.generic.edit import FormView, CreateView, UpdateView
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth.forms import (
+    AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm,
+)
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.views.generic import TemplateView, RedirectView, DetailView
@@ -144,4 +147,5 @@ class TrainerRegistration(FormView):
             fail_silently=False,
         )
         return super().form_valid(form)
+
 
