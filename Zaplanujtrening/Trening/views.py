@@ -8,8 +8,8 @@ from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.views.generic import TemplateView, RedirectView, DetailView
-from .forms import RegistrationForm, EditProfileForm, ContactForm, VoteForm
-from .models import MyUser,Rating
+from .forms import RegistrationForm, EditProfileForm, ContactForm, VoteForm, PlanForm, PlanNameForm
+from .models import MyUser,Rating, Plans, Parts, Exercises, ExercisesPlans
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -64,25 +64,12 @@ class EditProfile(LoginRequiredMixin,UpdateView):
     success_url = '/myaccount/'
 
 
+class CreatePlan(LoginRequiredMixin,CreateView):
+    model = ExercisesPlans
+    form_class = PlanForm
+    template_name = 'create_plan.html'
+    success_url = '/create/plan'
 
-"""class EditProfile(FormView):
-    template_name = 'edit_profile.html'
-    form_class = EditProfileForm
-    success_url = "/myaccount/"
-
-    def form_valid(self,form):
-        email = form.cleaned_data["email"]
-        first_name = form.cleaned_data["first_name"]
-        last_name = form.cleaned_data["last_name"]
-        about = form.cleaned_data["about"]
-
-        change_user = MyUser.objects.update(email=email,
-                                            first_name=first_name,
-                                            last_name=last_name,
-                                            about=about
-                                            )
-
-        return super().form_valid(form)"""
 
 
 class About(TemplateView):
@@ -150,3 +137,9 @@ class TrainerRegistration(FormView):
         )
         return super().form_valid(form)
 
+
+class PlanName(CreateView):
+    model = Plans
+    form_class = PlanNameForm
+    template_name = 'plan_name.html'
+    success_url = '/create/plan/'

@@ -16,3 +16,36 @@ class MyUser(AbstractUser):
 class Rating(models.Model):
     comments = models.TextField(verbose_name=_("komentarz"))
     user_comment = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True ,related_name="user_com")
+
+
+class Parts(models.Model):
+    part = models.CharField(max_length=70)
+
+
+class Exercises(models.Model):
+    exercise_name = models.CharField(max_length=70)
+    description = models.TextField(null=True)
+    gif = models.FileField()
+    part = models.ForeignKey(Parts, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.exercise_name
+
+
+class Plans(models.Model):
+    plan_name = models.CharField(max_length=70)
+    description = models.TextField(null=True)
+    exercise = models.ManyToManyField(Exercises, through='ExercisesPlans')
+
+    def __str__(self):
+        return self.plan_name
+
+
+class ExercisesPlans(models.Model):
+    exercise = models.ForeignKey(Exercises, on_delete=models.DO_NOTHING)
+    times = models.SmallIntegerField(null=True)
+    clock = models.SmallIntegerField(null=True)
+    rest_time = models.SmallIntegerField(null=True)
+    plan = models.ForeignKey(Plans, on_delete=models.DO_NOTHING)
+
+
