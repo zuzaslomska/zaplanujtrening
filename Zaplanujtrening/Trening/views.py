@@ -143,3 +143,9 @@ class PlanName(CreateView):
     form_class = PlanNameForm
     template_name = 'plan_name.html'
     success_url = '/create/plan/'
+
+
+class PlanList(ListView):
+    queryset = Plans.objects.all()
+    template_name = 'my_plans.html'
+    context_object_name = 'myplan'

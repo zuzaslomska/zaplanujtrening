@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,TrainersView, TrainerDetails,\
-    TrainerRegistration, EditProfile, CreatePlan, PlanName
+    TrainerRegistration, EditProfile, CreatePlan, PlanName, PlanList
 
 
 urlpatterns = [
@@ -38,6 +38,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html')),
     path('create/plan/',CreatePlan.as_view()),
     path('name/plan', PlanName.as_view()),
+    path('plan/list', PlanList.as_view()),
 
 
 
