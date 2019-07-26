@@ -50,18 +50,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/plan/list">
-                                <span>Twoje Plany</span>
-                                <i class="fas fa-angle-right"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="/exercises/list">
                                 <span>Ćwiczenia</span>
                                 <i class="fas fa-angle-right"></i>
                             </a>
                         </li>
                         {% if request.user.trener %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/plan/list">
+                                    <span>Twoje Plany</span>
+                                    <i class="fas fa-angle-right"></i>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/name/plan">
                                     <span>Stwórz Plan</span>

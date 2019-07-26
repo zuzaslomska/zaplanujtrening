@@ -161,3 +161,8 @@ class ExercisesList(ListView):
     queryset = Exercises.objects.all()
     template_name = 'exercises.html'
     context_object_name = 'exercises'
+
+
+class ExercisesDetails(DetailView):
+    model = Exercises
+    template_name = 'exercises_details.html'
