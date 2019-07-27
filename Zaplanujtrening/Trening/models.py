@@ -5,8 +5,8 @@ from django.contrib.auth.models import User,AbstractUser
 class MyUser(AbstractUser):
     about = models.TextField()
     trener = models.BooleanField(default=False)
-    avatar = models.ImageField(upload_to='profile_pics',null=True)
-    rating = models.DecimalField(verbose_name=_("Ocena"),default=0,decimal_places=1,max_digits=2)
+    avatar = models.ImageField(upload_to='profile_pics', null=True)
+    rating = models.DecimalField(verbose_name=_("Ocena"), default=0, decimal_places=1, max_digits=2)
     all_votes = models.IntegerField(default=0)
     sum_of_votes = models.IntegerField(default=0)
 
@@ -15,7 +15,7 @@ class MyUser(AbstractUser):
 
 class Rating(models.Model):
     comments = models.TextField(verbose_name=_("komentarz"))
-    user_comment = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True ,related_name="user_com")
+    user_comment = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True, related_name="user_com")
 
 
 class Parts(models.Model):
@@ -25,7 +25,7 @@ class Parts(models.Model):
 class Exercises(models.Model):
     exercise_name = models.CharField(max_length=70)
     description = models.TextField(null=True)
-    gif = models.FileField()
+    gif = models.ImageField(upload_to='profile_pics', null=True)
     part = models.ForeignKey(Parts, on_delete=models.DO_NOTHING)
 
     def __str__(self):
@@ -42,10 +42,10 @@ class Plans(models.Model):
 
 
 class ExercisesPlans(models.Model):
-    exercise = models.ForeignKey(Exercises, on_delete=models.DO_NOTHING)
+    exercise = models.ForeignKey(Exercises, on_delete=models.DO_NOTHING, null=True)
     times = models.SmallIntegerField(null=True)
     clock = models.SmallIntegerField(null=True)
     rest_time = models.SmallIntegerField(null=True)
-    plan = models.ForeignKey(Plans, on_delete=models.DO_NOTHING)
+    plan = models.ForeignKey(Plans, on_delete=models.DO_NOTHING, null=True)
 
 

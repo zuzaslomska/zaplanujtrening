@@ -1,7 +1,7 @@
 {% extends "__base__boczna.html" %}
 {% block content %}
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {{ form.as_p }}
         <input type="submit" value="Zmień dane">
         {% csrf_token %}
