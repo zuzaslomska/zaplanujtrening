@@ -21,15 +21,15 @@ class RegistrationForm(UserCreationForm):
                   "avatar":"Zdjęcie"}
 
 
-class EditProfileForm(UserChangeForm):
-    class Meta:
-        model=MyUser
-        fields = (
-            'first_name',
-            'last_name',
-            'email',
-            'about'
-        )
+#class EditProfileForm(UserChangeForm):
+ #   class Meta:
+  #      model=MyUser
+   #     fields = (
+    #        'first_name',
+     #       'last_name',
+      #      'email',
+       #     'about'
+        #)
 
 class ContactForm(forms.Form):
     contact_user  = forms.CharField(max_length=120,label="Imię")
@@ -57,3 +57,11 @@ class PlanNameForm(forms.ModelForm):
         model = Plans
         fields = "__all__"
         exclude = ['exercise','user_created']
+
+
+
+class EditProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = MyUser
+        fields = ['username', 'first_name', 'last_name', 'email', 'avatar', 'about']
