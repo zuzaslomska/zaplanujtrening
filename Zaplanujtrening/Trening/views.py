@@ -1,4 +1,5 @@
 from django.core.mail import send_mail
+from random import randint, shuffle
 from django.views.generic import ListView
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
@@ -22,6 +23,20 @@ class MainSite(View):
     def get(self, request):
         return render(request, "index.html")
 
+
+class Carousel(View):
+    def get(self, request):
+        trainers_number = MyUser.objects.filter(trener=True).count()
+        numbers = list(range(1, int(trainers_number)))
+        shuffle(numbers)
+        random1 = numbers.pop()
+        random2 = numbers.pop()
+        random3 = numbers.pop()
+
+        trainer = MyUser.objects.filter(pk=random1) | MyUser.objects.filter(pk=random2) | MyUser.objects.filter(pk=random3)
+
+        ctx = {"trainer": trainer}
+        return render(request, "index.html", ctx)
 
 class Registration(FormView):
     template_name = 'registration.html'
@@ -63,6 +78,7 @@ class EditProfile(LoginRequiredMixin, UpdateView):
     fields = ['username', 'first_name', 'last_name', 'email', 'avatar', 'about']
     template_name = 'edit_profile.html'
     success_url = '/myaccount/'
+
 
 
 class CreatePlan(LoginRequiredMixin, CreateView):

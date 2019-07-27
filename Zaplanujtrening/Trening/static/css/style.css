@@ -183,7 +183,7 @@ hr {
   color: var(--dark-text);
 }
 
-.carousel-control-prev-icon:after {	
+.carousel-control-prev-icon:after {
   content: '<';
   font-size: 55px;
   color: var(--dark-text);
@@ -197,6 +197,10 @@ hr {
   color: var(--dark-text) !important;
 }
 
+
+.carousel-inner {
+  position: center;
+}
 /*------------------------------*/
 /*---- More section----*/
 /*------------------------------*/
@@ -278,6 +282,11 @@ hr {
 
 .footer-section{
   background: var(--background-color);
+  clear: both;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+
 }
 
 .footer-text-color {

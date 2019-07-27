@@ -394,7 +394,7 @@ class PasswordResetView(PasswordContextMixin, FormView):
     extra_email_context = None
     form_class = PasswordResetForm
     from_email = 'zuzaslomska@gmail.com'
-    html_email_template_name = None
+    html_email_template_name = 'password_reset_confirm.html'
     subject_template_name = 'registration/password_reset_subject.txt'
     success_url = '/reset-password/done'
     template_name = 'password_reset_form.html'
