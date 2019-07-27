@@ -20,8 +20,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
-from Trening.views import MainSite, Registration, Login, About, Contact,MyAccount,TrainersView, TrainerDetails,\
-    TrainerRegistration, EditProfile, CreatePlan, PlanName
+from Trening.views import (MainSite, Registration, Login, About, Contact,MyAccount,TrainersView, TrainerDetails,\
+    TrainerRegistration, EditProfile, CreatePlan, PlanName, PlanList, PlanDetails, ExercisesList, ExercisesDetails)
 
 
 urlpatterns = [
@@ -47,6 +47,10 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html')),
     path('create/plan/',CreatePlan.as_view()),
     path('name/plan', PlanName.as_view()),
+    path('plan/list', PlanList.as_view()),
+    path('plan/details/<int:pk>', PlanDetails.as_view()),
+    path('exercises/list', ExercisesList.as_view()),
+    path('exercises/details/<int:pk>', ExercisesDetails.as_view()),
 
 
 

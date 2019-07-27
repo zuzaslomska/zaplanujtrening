@@ -12,16 +12,15 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.views.generic import TemplateView, RedirectView, DetailView
 from .forms import RegistrationForm, EditProfileForm, ContactForm, VoteForm, PlanForm, PlanNameForm
-from .models import MyUser,Rating, Plans, Parts, Exercises, ExercisesPlans
+from .models import MyUser, Rating, Plans, Parts, Exercises, ExercisesPlans
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
 class MainSite(View):
-    def get(self,request):
-        return render(request,"index.html")
 
+    def get(self, request):
+        return render(request, "index.html")
 
 
 class Registration(FormView):
@@ -29,7 +28,7 @@ class Registration(FormView):
     form_class = RegistrationForm
     success_url = '/login/'
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         form.save()
 
         return super().form_valid(form)
@@ -40,12 +39,12 @@ class Login(FormView):
     form_class = AuthenticationForm
     success_url = '/myaccount/'
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         username = form.cleaned_data["username"]
         password = form.cleaned_data["password"]
 
         user = authenticate(username=username, password=password)
-        login(self.request,user)
+        login(self.request, user)
         return super().form_valid(form)
 
 
@@ -54,25 +53,23 @@ class TrainersView(ListView):
     template_name = "Trainers.html"
     context_object_name = "myuser"
 
+
 class MyAccount(TemplateView):
     template_name = 'my_account.html'
 
 
-# class MyPlans():
-
-class EditProfile(LoginRequiredMixin,UpdateView):
+class EditProfile(LoginRequiredMixin, UpdateView):
     model = MyUser
-    fields = ['username','first_name','last_name','email','avatar','about']
+    fields = ['username', 'first_name', 'last_name', 'email', 'avatar', 'about']
     template_name = 'edit_profile.html'
     success_url = '/myaccount/'
 
 
-class CreatePlan(LoginRequiredMixin,CreateView):
+class CreatePlan(LoginRequiredMixin, CreateView):
     model = ExercisesPlans
     form_class = PlanForm
     template_name = 'create_plan.html'
     success_url = '/create/plan'
-
 
 
 class About(TemplateView):
@@ -94,19 +91,20 @@ class Contact(FormView):
             fail_silently=False,
         )
         return super().form_valid(form)
+    
 
 class TrainerDetails(View):
-    def get(self,request,pk):
+    def get(self, request, pk):
         model = MyUser.objects.get(pk=pk)
         comment_model = Rating.objects.filter(user_comment=pk)
-        ctx = {"myuser":model,"comment":comment_model}
+        ctx = {"myuser": model, "comment": comment_model}
 
         return render(request, "Trainer_detail.html", ctx)
 
-    def post(self,request,pk):
+    def post(self, request, pk):
         model = MyUser.objects.get(pk=pk)
         comment_model = Rating.objects.filter(user_comment=pk)
-        ctx = {"myuser": model,"comment":comment_model}
+        ctx = {"myuser": model, "comment": comment_model}
 
         vote = request.POST.get("vote")
         model.sum_of_votes += (int(vote))
@@ -115,6 +113,7 @@ class TrainerDetails(View):
         model.rating = avg_votes
         model.save()
         return render(request, "Trainer_detail.html", ctx)
+
 
 class TrainerRegistration(FormView):
     template_name = 'registration.html'
@@ -132,8 +131,8 @@ class TrainerRegistration(FormView):
         )
         send_mail(
             "Zaplanuj Trening",
-            "Witaj "+form.cleaned_data['username']+"!"+ "Twoje zapytanie o zostanie trenerem jest rozpatrywane,"
-                                                            "poczekaj na wiadomość od nas!" ,
+            "Witaj "+form.cleaned_data['username']+"!" + """Twoje zapytanie o zostanie trenerem jest rozpatrywane,
+                                                            poczekaj na wiadomość od nas!""",
             "dudixxx100@gmail.com",
             [form.cleaned_data["email"]],
             fail_silently=False,
@@ -147,3 +146,25 @@ class PlanName(CreateView):
     template_name = 'plan_name.html'
     success_url = '/create/plan/'
 
+
+class PlanList(ListView):
+    queryset = Plans.objects.all()
+    template_name = 'my_plans.html'
+    context_object_name = 'myplan'
+
+
+class PlanDetails(DetailView):
+    model = Plans
+    template_name = 'plan_details.html'
+#   slug_url_kwarg = ExercisesPlans.plan
+
+
+class ExercisesList(ListView):
+    queryset = Exercises.objects.all()
+    template_name = 'exercises.html'
+    context_object_name = 'exercises'
+
+
+class ExercisesDetails(DetailView):
+    model = Exercises
+    template_name = 'exercises_details.html'

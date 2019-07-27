@@ -1,0 +1,6 @@
+{% extends '__base1__glowna.html' %}
+{% block content %}
+    {% for exercise in exercises %}
+        <li><a href="/exercises/details/{{ exercise.pk }}">{{ exercise.exercise_name }}</a></li>
+    {% endfor %}
+{% endblock %}

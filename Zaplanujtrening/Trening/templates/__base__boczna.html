@@ -17,7 +17,7 @@
 <body>
     <header class="page-header">
         <nav class="navbar navbar-expand-lg justify-content-between">
-            <a href="/myaccount" class="navbar-brand main-logo main-logo-smaller">
+            <a href="/" class="navbar-brand main-logo main-logo-smaller">
                 Zaplanuj <span>Trening</span>
             </a>
          <div class="d-flex justify-content-around">
@@ -50,18 +50,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/plan/list">
-                                <span>Twoje Plany</span>
-                                <i class="fas fa-angle-right"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="/exercises/list">
                                 <span>Ćwiczenia</span>
                                 <i class="fas fa-angle-right"></i>
                             </a>
                         </li>
                         {% if request.user.trener %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/plan/list">
+                                    <span>Twoje Plany</span>
+                                    <i class="fas fa-angle-right"></i>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/name/plan">
                                     <span>Stwórz Plan</span>
