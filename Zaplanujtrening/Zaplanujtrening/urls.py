@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from Trening.Ready import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView,\
+    PasswordResetCompleteView, PasswordChangeView, PasswordChangeDoneView
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -22,8 +24,8 @@ from Trening.views import (MainSite, Registration, Login, About, Contact,MyAccou
     TrainerRegistration, EditProfile, CreatePlan, PlanName, PlanList, PlanDetails, ExercisesList, ExercisesDetails)
 
 
-
 urlpatterns = [
+    path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('', MainSite.as_view()),
     path('registration/', Registration.as_view()),
@@ -34,7 +36,13 @@ urlpatterns = [
     path('about/', About.as_view()),
     path('contact/', Contact.as_view()),
     path('myaccount/', MyAccount.as_view()),
-  #  path('myplans/', MyPlans.as_view()),
+    path('reset-password/', PasswordResetView.as_view()),
+    path('reset-password/done', PasswordResetDoneView.as_view()),
+    re_path(r'^reset-password/confirm/<uidb64>/<token>/',
+             PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset-password/complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('changepassword/', PasswordChangeView.as_view()),
+    path('changepassword/done', PasswordChangeDoneView.as_view()),
     path('editprofile/<int:pk>', EditProfile.as_view()),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html')),
     path('create/plan/',CreatePlan.as_view()),
@@ -43,6 +51,7 @@ urlpatterns = [
     path('plan/details/<int:pk>', PlanDetails.as_view()),
     path('exercises/list', ExercisesList.as_view()),
     path('exercises/details/<int:pk>', ExercisesDetails.as_view()),
+
 
 
 
