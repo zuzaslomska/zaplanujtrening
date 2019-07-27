@@ -91,7 +91,7 @@ class Contact(FormView):
             fail_silently=False,
         )
         return super().form_valid(form)
-    
+
 
 class TrainerDetails(View):
     def get(self, request, pk):
