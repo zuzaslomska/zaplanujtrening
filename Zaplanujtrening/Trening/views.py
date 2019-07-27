@@ -16,6 +16,7 @@ from .models import MyUser, Rating, Plans, Parts, Exercises, ExercisesPlans
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.http.request import HttpRequest
 
 class MainSite(View):
 
@@ -58,11 +59,43 @@ class MyAccount(TemplateView):
     template_name = 'my_account.html'
 
 
-class EditProfile(LoginRequiredMixin, UpdateView):
-    model = MyUser
-    fields = ['username', 'first_name', 'last_name', 'email', 'avatar', 'about']
+class EditProfile(LoginRequiredMixin, FormView):
     template_name = 'edit_profile.html'
+    form_class = EditProfileForm
     success_url = '/myaccount/'
+
+    def get_initial(self):
+        initial = super(EditProfile,self).get_initial()
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            initial.update({'username':user.username,
+                            'first_name':user.first_name,
+                            'last_name': user.last_name,
+                            'email': user.email,
+                            'about': user.about,
+                            'avatar': user.avatar,
+                            })
+
+            return initial
+
+    def form_valid(self, form):
+        username = form.cleaned_data["username"]
+        first_name = form.cleaned_data["first_name"]
+        last_name = form.cleaned_data["last_name"]
+        email = form.cleaned_data["email"]
+        about = form.cleaned_data["about"]
+        avatar = form.cleaned_data['avatar']
+
+        user = MyUser.objects.get(id=self.request.user.id)
+        
+        user.username = username
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.about = about
+        user.avatar = avatar
+        user.save()
+        return super().form_valid(form)
 
 
 class CreatePlan(LoginRequiredMixin, CreateView):
@@ -145,17 +178,20 @@ class PlanName(CreateView):
     form_class = PlanNameForm
     template_name = 'plan_name.html'
     success_url = '/create/plan/'
+
     def form_valid(self, form):
-        # Plans.user_created = self.request.user
         plan = form.save()
         plan.user_created = self.request.user
         plan.save()
         return super().form_valid(form)
 
 class PlanList(ListView):
-    queryset = Plans.objects.all()
     template_name = 'my_plans.html'
     context_object_name = 'myplan'
+
+    def get_queryset(self):
+        queryset = Plans.objects.filter(user_created=self.request.user.id)
+        return queryset
 
 
 class PlanDetails(DetailView):
