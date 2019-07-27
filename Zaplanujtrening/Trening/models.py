@@ -36,6 +36,7 @@ class Plans(models.Model):
     plan_name = models.CharField(max_length=70)
     description = models.TextField(null=True)
     exercise = models.ManyToManyField(Exercises, through='ExercisesPlans')
+    user_created = models.ForeignKey(MyUser, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
         return self.plan_name

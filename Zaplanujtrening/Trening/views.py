@@ -145,7 +145,12 @@ class PlanName(CreateView):
     form_class = PlanNameForm
     template_name = 'plan_name.html'
     success_url = '/create/plan/'
-
+    def form_valid(self, form):
+        # Plans.user_created = self.request.user
+        plan = form.save()
+        plan.user_created = self.request.user
+        plan.save()
+        return super().form_valid(form)
 
 class PlanList(ListView):
     queryset = Plans.objects.all()

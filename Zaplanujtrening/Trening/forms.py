@@ -56,4 +56,4 @@ class PlanNameForm(forms.ModelForm):
     class Meta:
         model = Plans
         fields = "__all__"
-        exclude = ['exercise']
+        exclude = ['exercise','user_created']
